@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookies</title>
+</head>
+
+<body>
+    <h1> Login to the website</h1>
+    <form>
+        <div>
+            <input type="text" id="firstname" placeholder="Firstname" />
+            <input type="email" id="email" placeholder="Email" />
+            <button type="button" onclick="setCookies()">Log me in</button>
+        </div>
+        <br>
+        <h1 id="cookiesValue">Cookies</h1>
+        <br>
+        <button type="button" onclick="showCookies()">Show the cookies</button>
+
+    </form>
+
+
+    <script>
+        function setCookies() {
+            const firstname = document.getElementById('firstname');
+            const email = document.getElementById('email');
+            const nameValue = firstname.value;
+            const emailValue = email.value;
+
+            // create instance from Date to add in expire date
+            const expirationDate = new Date();
+            expirationDate.setDate(expirationDate.getDate() + 10);
+
+            // add expire date to the cookies
+
+            document.cookie = `firstname=${nameValue} ; expires=${expirationDate.toUTCString()}`;
+            document.cookie = `email=${emailValue}; expires=${expirationDate.toUTCString()}`;
+
+
+            alert("Cookies st Successfully")
+           
+        }
+        // function to getCookies with argument name and check it 
+        function getCookie(name) {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.startsWith(name + '=')) {
+                    return cookie.substring(name.length + 1);
+                }
+            }
+            return '';
+        }
+
+        function showCookies() {
+            // update showCookies to check name and email from getCookie function
+            const email = getCookie('email');
+            const firstname = getCookie('firstname');
+            const cookiesElement = document.getElementById('cookiesValue');
+            cookiesElement.innerHTML = `Email: ${email} - Firstname: ${firstname}`;
+        }
+
+        
+    </script>
+</body>
+
+</html>
