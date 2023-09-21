@@ -1,70 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cookies</title>
-</head>
-
-<body>
-    <h1> Login to the website</h1>
-    <form>
-        <div>
-            <input type="text" id="firstname" placeholder="Firstname" />
-            <input type="email" id="email" placeholder="Email" />
-            <button type="button" onclick="setCookies()">Log me in</button>
-        </div>
-        <br>
-        <h1 id="cookiesValue">Cookies</h1>
-        <br>
-        <button type="button" onclick="showCookies()">Show the cookies</button>
-
-    </form>
-
-
+<html>
+  <head>
+    <title>2-index</title>
     <script>
-        function setCookies() {
-            const firstname = document.getElementById('firstname');
-            const email = document.getElementById('email');
-            const nameValue = firstname.value;
-            const emailValue = email.value;
+      function setCookies() {
+        let firstname = document.getElementById("firstname").value;
+        let email = document.getElementById("email").value;
+        document.cookie = `firstname=${firstname}`;
+        document.cookie = `email=${email}`;
+      }
 
-            // create instance from Date to add in expire date
-            const expirationDate = new Date();
-            expirationDate.setDate(expirationDate.getDate() + 10);
-
-            // add expire date to the cookies
-
-            document.cookie = `firstname=${nameValue} ; expires=${expirationDate.toUTCString()}`;
-            document.cookie = `email=${emailValue}; expires=${expirationDate.toUTCString()}`;
-
-
-            alert("Cookies st Successfully")
-           
+      function getCookie(name) {
+        let cookies = document.cookie.split("; ");
+        for (let i = 0; i < cookies.length; i++) {
+          let cookie = cookies[i];
+          if (cookie.startsWith(name + "=")) {
+            return cookie.split("=")[1];
+          }
         }
-        // function to getCookies with argument name and check it 
-        function getCookie(name) {
-            const cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i].trim();
-                if (cookie.startsWith(name + '=')) {
-                    return cookie.substring(name.length + 1);
-                }
-            }
-            return '';
-        }
+        return "";
+      }
 
-        function showCookies() {
-            // update showCookies to check name and email from getCookie function
-            const email = getCookie('email');
-            const firstname = getCookie('firstname');
-            const cookiesElement = document.getElementById('cookiesValue');
-            cookiesElement.innerHTML = `Email: ${email} - Firstname: ${firstname}`;
-        }
-
-        
+      function showCookies() {
+        let firstname = getCookie("firstname");
+        let email = getCookie("email");
+        let p = document.createElement("p");
+        p.innerHTML = `Email: ${email} - Firstname: ${firstname}`;
+        document.body.appendChild(p);
+      }
     </script>
-</body>
-
+  </head>
+  <body>
+    <input type="text" id="firstname" placeholder="First Name" /><br /><br />
+    <input type="text" id="email" placeholder="Email" /><br /><br />
+    <button onclick="setCookies()">Log me in</button><br /><br />
+    <button onclick="showCookies()">Show the cookies</button>
+  </body>
 </html>
