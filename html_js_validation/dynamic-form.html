@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <form id="dynamicForm" class="form">
+            <div class="form-field">
+                <label for="numFields">Number of Fields:</label>
+                <select id="numFields" name="numFields">
+                    <option value="">-- Select --</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <!-- <option value="4">4</option>
+                    <option value="5">5</option> -->
+                </select>
+                <div id="inputContainer"></div>
+            </div>
+
+            <div class="form-field">
+                <button type="submit" class="btn">Submit</button>
+                <p id="errorMessage" style="display: none; color: red;"></p>
+            </div>
+        </form>
+    </div>
+
+    <script src="js/2-dynamic-form.js"></script>
+</body>
+</html>
